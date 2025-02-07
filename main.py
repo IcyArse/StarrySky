@@ -1,14 +1,12 @@
-from matplotlib import pyplot as plt
-from astropy.coordinates import SkyCoord, AltAz
-import astropy.units as u
-import pandas as pd
-import skyfield
+# datetime libraries
+from datetime import datetime
+from geopy import Nominatim
+from tzwhere import tzwhere
+from pytz import timezone, utc
+# matplotlib to help display our star map
+import matplotlib.pyplot as plt
+# skyfield for star data 
+from skyfield.api import Star, load, wgs84
+from skyfield.data import hipparcos
+from skyfield.projections import build_stereographic_projection
 
-# df = pd.read_csv('catalogcopy', sep=None)
-# print(df)
-
-
-# cordinates value for your location
-lat = -33.870
-lon = 151.208
-alt = 0
