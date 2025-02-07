@@ -13,5 +13,23 @@ from skyfield.projections import build_stereographic_projection
 earth = load('de421.bsp') # loads respective postion of earth and sun
 
 #loads up stars dataset from the hipparcos catalog
-with open(hipparcos.URL) as f:
+with load.open(hipparcos.URL) as f:
         stars = hipparcos.load_dataframe(f)
+
+#Loading location and makingg instance for geopy
+locator = Nominatim(user_agent='IcyLocator')
+
+location = "Solan"
+time = "2025-01-31 02:00"
+
+location = locator.geocode(location)
+lat, longi = location.latitude, location.longitude
+
+timezstr = tzwhere.tzwhere().tzNameAt(lat, longi)
+localzone = timezone(timezstr)
+
+print(localzone)
+
+
+
+
