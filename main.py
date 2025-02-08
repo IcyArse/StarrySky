@@ -28,7 +28,12 @@ location = locator.geocode(location)
 lat, lon = location.latitude, location.longitude
 
 localzone = tf.certain_timezone_at(lat=lat, lng=lon)
-print(localzone)
+local = timezone(localzone)
+
+time = datetime.strptime(time, '%Y-%m-%d %H:%M')
+localtime = local.localize(time, is_dst=None)
+utc_time = localtime.astimezone(utc)
+print(utc_time)
 
 
 
