@@ -45,3 +45,15 @@ to = ts.from_datetime(utc_time)
 observer = wgs84.latlon(latitude_degrees=lat, longitude_degrees=lon).at(to)
 position = observer.from_altaz(alt_degrees=90, az_degrees=0)
 
+#loading star data
+
+#generating placeholder star
+ra, dec, distance = observer.radec()
+placeholder_object = Star(ra=ra, dec=dec)
+
+center = earth.at(to).observe(placeholder_object)
+projection = build_stereographic_projection(center)
+
+star_positions = earth.at(to).observe(Star.from_dataframe(stars))
+stars['x'], stars['y'] = projection(star_positions)
+
