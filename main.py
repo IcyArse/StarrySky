@@ -35,6 +35,13 @@ localtime = local.localize(time, is_dst=None)
 utc_time = localtime.astimezone(utc)
 print(utc_time)
 
+#loading up the locations of sun, earth and observer and time of the observation
+earth = es['earth']
+sun = es['sun']
 
+ts = load.timescale()
+to = ts.from_datetime(utc_time)
 
+observer = wgs84.latlon(latitude_degrees=lat, longitude_degrees=lon).at(to)
+position = observer.from_altaz(alt_degrees=90, az_degrees=0)
 
