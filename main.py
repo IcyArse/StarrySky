@@ -57,3 +57,30 @@ projection = build_stereographic_projection(center)
 star_positions = earth.at(to).observe(Star.from_dataframe(stars))
 stars['x'], stars['y'] = projection(star_positions)
 
+
+#plotting time
+plot_size = 8
+max_size_star = 100
+min_magnitude = 20 #star brightness magnitude
+
+br_stars = (stars.magnitude <= min_magnitude)
+magnitude = stars['magnitude'][br_stars]
+
+fig, ax = plt.subplots(figsize=(plot_size*2, plot_size))
+border = plt.Rectangle((-1, -1), plot_size*2, plot_size, color='black', fill=True)
+
+ax.add_patch(border)
+
+star_size = max_size_star * 10 ** (magnitude / -2.5) #formula to calculate star brightness 
+ax.scatter(stars['x'][br_stars], stars['y'][br_stars], s=star_size, marker='.', color='white', linewidths=0, zorder=2)
+
+horizon = plt.Rectangle((-1, -1), plot_size*2, plot_size, transform=ax.transData)
+for col in ax.collections:
+        col.set_clip_path(horizon)
+
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+plt.axis('off')
+
+plt.show()
+
