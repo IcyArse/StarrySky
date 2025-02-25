@@ -22,7 +22,7 @@ locator = Nominatim(user_agent='IcyLocator')
 tf = timezonefinder.TimezoneFinder()
 
 location = 'Delhi'
-time = "2025-01-31 02:00"
+time = "2025-09-05 00:00"
 
 location = locator.geocode(location)
 lat, lon = location.latitude, location.longitude
